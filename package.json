@@ -26,7 +26,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@nestjs-toolkit/base": "^0.0.2",
+    "@nestjs-toolkit/base": "^0.0.3",
     "@nestjs-toolkit/winston-logger": "^0.0.14",
     "@nestjs/cli": "^7.0.0",
     "@nestjs/common": "^7.0.0",
