@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { GraphqlService } from './graphql.service';
+import { ObjectIdScalar } from './scalars';
+import { CustomDateResolver, CustomNumberResolver } from './resolvers';
 
 @Module({
-  providers: [GraphqlService],
-  exports: [GraphqlService],
+  providers: [ObjectIdScalar, CustomDateResolver, CustomNumberResolver],
 })
-export class GraphqlModule {}
+export class CommonGraphqlModule {}
