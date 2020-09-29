@@ -44,8 +44,3 @@ jobs:
 
       - name: lib:build
         run: yarn lib:build
-
-      - name: lib:test
-        run: yarn lib:test
-
-

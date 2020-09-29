@@ -1,0 +1,45 @@
+type VersionInfo {
+  name: String!
+  version: String!
+  env: String!
+}
+
+type UserToken {
+  user_id: ID!
+  type: String!
+  token: String!
+  channel: String
+  created_at: CustomDate!
+}
+
+type DemoDate {
+  foo: String!
+  date: CustomDate!
+  other_date: DateScalar!
+  created_at: CustomDate!
+}
+
+type DemoNumber {
+  foo: String!
+  amount: CustomNumber!
+  amount_str: CustomNumber!
+  negative_value: CustomNumber!
+}
+
+type Query {
+  api: VersionInfo!
+
+  """
+  ## List tokens
+  Lista os tokens relacionados ao login
+  Obs: executaval apenas em ambiente local, sandbox, develop
+  """
+  listTokens(login: String!): [UserToken]!
+
+  demoDate(date: Date = "2020-04-11T08:00:00.000Z"): DemoDate!
+
+  demoNumber: DemoNumber!
+
+  demoPing(msg: String = "ping"): Boolean!
+}
+

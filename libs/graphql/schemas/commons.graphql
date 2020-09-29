@@ -1,0 +1,128 @@
+#scalar Date
+scalar JSON
+
+scalar Demo
+
+scalar Date
+
+scalar ObjectId
+
+directive @upper on FIELD_DEFINITION
+
+enum SortOrderEnum {
+    ASC
+    DESC
+}
+
+enum ActionsEnum {
+    CREATED
+    UPDATED
+    DELETED
+}
+
+input TransObjectInput {
+    en: String
+    es: String
+    pt_br: String
+}
+
+type TransObject {
+    en: String
+    es: String
+    pt_br: String
+}
+
+type SimpleResponse {
+    message: String!
+}
+
+type HttpError {
+    httpCode: Int
+    code: String
+}
+
+type Validation {
+    message: String!
+    field: String!
+    validation: String!
+}
+
+type ErrorResponse {
+    message: String!
+    error: HttpError
+    validation: [Validation]
+}
+
+type Pagination {
+    total: Int!
+    page: Int!
+    perPage: Int!
+    lastPage: Int!
+}
+
+type ImageThumb {
+    thumb: String!
+    small: String!
+    large: String!
+}
+
+type CustomDate {
+    """
+    Integer value representing the number of milliseconds since the Unix Epoch (Jan 1 1970 12AM UTC).
+    """
+    timestamp: Float
+
+    """
+    Unix timestamp (seconds since the Unix Epoch)
+    """
+    unix: Float
+
+    """
+    UTC time instead of local time
+    """
+    utc: String
+
+    """
+    Formats a string to the ISO8601 standard.
+    """
+    iso: String
+
+    """
+    String matches the RFC 2822 Date time format
+    """
+    string: String
+
+    """
+    This function returns the real offset from UTC, not the reverse offset
+    """
+    timezone(offset: String!): String
+
+    """
+    If you know the format of an input string, you can use that to parse a date.
+    Readmore: [momentjs format date](https://momentjs.com/docs/#/parsing/string-format)
+    """
+    format(format: String!): String
+}
+
+type CustomNumber {
+    string: String
+
+    int: Int
+
+    float: Float
+
+    fixed(digits: Int!): String
+
+    format(before: String, after: String, digits: Int = 2): String
+}
+
+
+#directive @cacheControl(
+#  maxAge: Int
+#  scope: CacheControlScope
+#) on OBJECT | FIELD_DEFINITION
+
+#enum CacheControlScope {
+#  PUBLIC
+#  PRIVATE
+#}
