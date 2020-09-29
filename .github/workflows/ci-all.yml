@@ -1,0 +1,51 @@
+name: NestJs Workflow
+
+on: [ pull_request ]
+
+jobs:
+  test-ci:
+
+    runs-on: ubuntu-18.04
+
+    # Service containers to run with `container-job`
+    services:
+      mongo:
+        image: mongo:latest
+        env:
+          MONGODB_DATABASE: nest
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://npm.pkg.github.com'
+          always-auth: false
+          scope: nestjs-toolkit
+
+      - name: Yarn intall
+        run: yarn install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Lint
+        run: yarn lint
+
+      - name: testing
+        run: yarn test:cov
+
+      - name: testing e2e
+        run: yarn test:e2e
+
+      - name: lib:build
+        run: yarn lib:build
+
+      - name: lib:test
+        run: yarn lib:test
+
+
