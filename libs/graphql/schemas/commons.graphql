@@ -7,6 +7,8 @@ scalar Date
 
 scalar ObjectId
 
+scalar Upload
+
 directive @upper on FIELD_DEFINITION
 
 enum SortOrderEnum {
@@ -116,6 +118,13 @@ type CustomNumber {
     format(before: String, after: String, digits: Int = 2): String
 }
 
+type File {
+    id: ID!
+    path: String!
+    filename: String!
+    mimetype: String!
+    encoding: String!
+}
 
 #directive @cacheControl(
 #  maxAge: Int

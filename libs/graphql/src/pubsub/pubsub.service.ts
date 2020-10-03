@@ -5,7 +5,7 @@ import { RedisPubSub } from 'graphql-redis-subscriptions';
 
 @Injectable()
 export class PubSubService implements OnApplicationShutdown {
-  constructor(@Inject(GQL_PUB_SUB) private readonly pubSub: PubSub) {}
+  constructor(@Inject(GQL_PUB_SUB) public readonly pubSub: PubSub) {}
 
   async onApplicationShutdown(): Promise<void> {
     if (this.pubSub instanceof RedisPubSub) {
@@ -15,6 +15,13 @@ export class PubSubService implements OnApplicationShutdown {
 
   publish(triggerName: string, payload: any): Promise<void> {
     return this.pubSub.publish(triggerName, { [triggerName]: payload });
+  }
+
+  customPublish(
+    triggerName: string,
+    payload: Record<string, any>,
+  ): Promise<void> {
+    return this.pubSub.publish(triggerName, payload);
   }
 
   asyncIterator<T>(triggers: string | string[]): AsyncIterator<T> {
