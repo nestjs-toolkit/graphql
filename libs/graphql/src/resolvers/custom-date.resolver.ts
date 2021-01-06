@@ -1,5 +1,5 @@
 import { ResolveField, Resolver } from '@nestjs/graphql';
-import { RequestLocale } from '@nestjs-toolkit/base';
+import { RequestLocale } from '@nestjs-toolkit/base/dist/locale';
 
 type Context = {
   requestLocale: RequestLocale;

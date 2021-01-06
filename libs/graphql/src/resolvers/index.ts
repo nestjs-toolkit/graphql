@@ -1,2 +1,2 @@
-export * from './custom-number.resolver';
-export * from './custom-date.resolver';
+export { CustomNumberResolver } from './custom-number.resolver';
+export { CustomDateResolver } from './custom-date.resolver';
