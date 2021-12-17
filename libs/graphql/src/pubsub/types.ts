@@ -1,5 +1,5 @@
-import { ModuleMetadata } from '@nestjs/common/interfaces';
 import * as IORedis from 'ioredis';
+import { ModuleMetadata } from '@nestjs/common/interfaces';
 
 export type RedisOptions = IORedis.RedisOptions | string;
 

@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnApplicationShutdown } from '@nestjs/common';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { PubSub } from 'graphql-subscriptions';
 import { GQL_PUB_SUB } from './constants';
-import { RedisPubSub } from 'graphql-redis-subscriptions';
 
 @Injectable()
 export class PubSubService implements OnApplicationShutdown {

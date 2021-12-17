@@ -1,6 +1,6 @@
-import { Scalar } from '@nestjs/graphql';
-import { Kind, ASTNode } from 'graphql';
 import { Types } from 'mongoose';
+import { Kind, ASTNode } from 'graphql';
+import { Scalar } from '@nestjs/graphql';
 
 @Scalar('ObjectId')
 export class ObjectIdScalar {
@@ -18,6 +18,7 @@ export class ObjectIdScalar {
     if (ast.kind === Kind.STRING) {
       return new Types.ObjectId(ast.value); // ast value is always in string format
     }
+
     return null;
   }
 }

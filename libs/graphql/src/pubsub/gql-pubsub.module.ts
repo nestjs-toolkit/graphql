@@ -1,7 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { GQL_PUB_SUB } from './constants';
-import { PubSubService } from './pubsub.service';
 import { PubSub } from 'graphql-subscriptions';
+import { PubSubService } from './pubsub.service';
+import { GQL_PUB_SUB } from './constants';
 
 @Module({})
 export class GqlPubSubModule {
