@@ -7,13 +7,17 @@
     "addUntrackedFiles": false,
     "commit": true,
     "commitMessage": "chore: release v${version}",
-    "commitArgs": ["--no-verify"],
+    "commitArgs": [
+      "--no-verify"
+    ],
     "tag": true,
     "tagName": null,
     "tagAnnotation": "build: ${version}",
     "tagArgs": [],
     "push": true,
-    "pushArgs": ["--follow-tags"],
+    "pushArgs": [
+      "--follow-tags"
+    ],
     "pushRepo": ""
   },
   "github": {
@@ -24,8 +28,12 @@
     "publish": true
   },
   "hooks": {
+    "before:init": [
+      "yarn lint",
+      "yarn prebuild"
+    ],
     "after:bump": "yarn lib:build",
-    "after:git:release": "echo After git push, before github release",
+    "after:git:release": "echo \"After git push, before github release\" && git clean -df",
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   }
 }

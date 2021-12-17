@@ -22,7 +22,7 @@
     "doc": "doctoc docs --title='## Summary'",
     "commit": "git-cz",
     "release": "release-it --patch",
-    "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && mv dist/libs/graphql/src/* dist && cp -r libs/graphql/schemas dist && rm -r dist/libs"
+    "lib:build": "yarn build graphql --tsc && mv dist/libs/graphql/* . && cp -r libs/graphql/schemas ."
   },
   "dependencies": {},
   "devDependencies": {
