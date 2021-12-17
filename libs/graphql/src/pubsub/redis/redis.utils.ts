@@ -1,6 +1,6 @@
 import * as IORedis from 'ioredis';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
-import { RedisOptions } from './types';
+import { RedisOptions } from '../types';
 
 // REF: https://github.com/davidyaha/graphql-redis-subscriptions
 

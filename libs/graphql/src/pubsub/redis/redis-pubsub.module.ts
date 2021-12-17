@@ -1,8 +1,8 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common';
-import { GQL_PUB_SUB, GQL_PUB_SUB_REDIS_OPTIONS } from './constants';
+import { GQL_PUB_SUB, GQL_PUB_SUB_REDIS_OPTIONS } from '../constants';
+import { RedisModuleOptionsFactory, RedisOptions } from '../types';
+import { PubSubService } from '../pubsub.service';
 import { connectRedisPubSubAsync, connectRedisPubSub } from './redis.utils';
-import { PubSubService } from './pubsub.service';
-import { RedisModuleOptionsFactory, RedisOptions } from './types';
 
 @Module({})
 export class RedisPubSubModule {

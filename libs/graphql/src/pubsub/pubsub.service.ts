@@ -1,14 +1,15 @@
 import { Inject, Injectable, OnApplicationShutdown } from '@nestjs/common';
-import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { PubSub } from 'graphql-subscriptions';
 import { GQL_PUB_SUB } from './constants';
 
+type PubSubCustom = PubSub & { close?: any };
+
 @Injectable()
 export class PubSubService implements OnApplicationShutdown {
-  constructor(@Inject(GQL_PUB_SUB) public readonly pubSub: PubSub) {}
+  constructor(@Inject(GQL_PUB_SUB) public readonly pubSub: PubSubCustom) {}
 
   async onApplicationShutdown(): Promise<void> {
-    if (this.pubSub instanceof RedisPubSub) {
+    if (this.pubSub.close) {
       await this.pubSub.close();
     }
   }
