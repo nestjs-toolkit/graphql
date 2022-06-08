@@ -1,12 +1,12 @@
+import IORedis from 'ioredis';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
-import * as IORedis from 'ioredis';
 import { RedisOptions } from './types';
 
 // REF: https://github.com/davidyaha/graphql-redis-subscriptions
 
-export function instanceRedis(options?: RedisOptions): IORedis.Redis {
-  const defaultOptions: IORedis.RedisOptions = {
-    retryStrategy: times => {
+export function instanceRedis(options?: RedisOptions): IORedis {
+  const defaultOptions: RedisOptions = {
+    retryStrategy: (times) => {
       // reconnect after
       return Math.min(times * 50, 2000);
     },
@@ -19,12 +19,12 @@ export function instanceRedis(options?: RedisOptions): IORedis.Redis {
   }
 }
 
-export function connectRedis(options?: RedisOptions): Promise<IORedis.Redis> {
-  return new Promise<IORedis.Redis>(resolve => {
+export function connectRedis(options?: RedisOptions): Promise<IORedis> {
+  return new Promise<IORedis>((resolve) => {
     const redis = instanceRedis(options);
 
     // the callback will be invoked once connected
-    redis.on('connect', function() {
+    redis.on('connect', function () {
       resolve(redis);
     });
   });

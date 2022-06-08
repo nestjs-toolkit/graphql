@@ -1,8 +1,8 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common';
-import { GQL_PUB_SUB, GQL_PUB_SUB_REDIS_OPTIONS } from './constants';
+import { GQL_PUB_SUB, GQL_PUB_SUB_REDIS_OPTIONS } from '../constants';
+import { PubSubService } from '../pubsub.service';
 import { connectRedisPubSubAsync, connectRedisPubSub } from './redis.utils';
-import { PubSubService } from './pubsub.service';
-import { RedisModuleOptionsFactory, RedisOptions } from './types';
+import { RedisModuleOptionsFactory } from './types';
 
 @Module({})
 export class RedisPubSubModule {
@@ -20,12 +20,10 @@ export class RedisPubSubModule {
   ): DynamicModule {
     const connectionProvider: Provider = {
       provide: GQL_PUB_SUB,
-      useFactory: (options: RedisOptions) => {
-        return isAsync
+      useFactory: () =>
+        isAsync
           ? connectRedisPubSubAsync(options)
-          : connectRedisPubSub(options);
-      },
-      inject: [GQL_PUB_SUB_REDIS_OPTIONS],
+          : connectRedisPubSub(options),
     };
 
     return {

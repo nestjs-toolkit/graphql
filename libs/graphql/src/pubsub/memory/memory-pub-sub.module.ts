@@ -1,13 +1,13 @@
-import { DynamicModule, Module } from '@nestjs/common';
-import { GQL_PUB_SUB } from './constants';
-import { PubSubService } from './pubsub.service';
 import { PubSub } from 'graphql-subscriptions';
+import { DynamicModule, Module } from '@nestjs/common';
+import { GQL_PUB_SUB } from '../constants';
+import { PubSubService } from '../pubsub.service';
 
 @Module({})
-export class GqlPubSubModule {
+export class MemoryPubSubModule {
   static forRoot(): DynamicModule {
     return {
-      module: GqlPubSubModule,
+      module: MemoryPubSubModule,
       providers: [
         PubSubService,
         {

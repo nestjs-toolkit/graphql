@@ -1,0 +1,50 @@
+
+type CustomDate {
+    """
+    Integer value representing the number of milliseconds since the Unix Epoch (Jan 1 1970 12AM UTC).
+    """
+    timestamp: Float
+
+    """
+    Unix timestamp (seconds since the Unix Epoch)
+    """
+    unix: Float
+
+    """
+    UTC time instead of local time
+    """
+    utc: String
+
+    """
+    Formats a string to the ISO8601 standard.
+    """
+    iso: String
+
+    """
+    String matches the RFC 2822 Date time format
+    """
+    string: String
+
+    """
+    This function returns the real offset from UTC, not the reverse offset
+    """
+    timezone(offset: String!): String
+
+    """
+    If you know the format of an input string, you can use that to parse a date.
+    Read more: [momentjs format date](https://momentjs.com/docs/#/parsing/string-format)
+    """
+    format(format: String!): String
+}
+
+type CustomNumber {
+    string: String
+
+    int: Int
+
+    float: Float
+
+    fixed(digits: Int!): String
+
+    format(before: String, after: String, digits: Int = 2): String
+}

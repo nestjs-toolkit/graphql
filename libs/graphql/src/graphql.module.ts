@@ -5,4 +5,4 @@ import { CustomDateResolver, CustomNumberResolver } from './resolvers';
 @Module({
   providers: [ObjectIdScalar, CustomDateResolver, CustomNumberResolver],
 })
-export class CommonGraphqlModule {}
+export class ToolkitGraphqlModule {}

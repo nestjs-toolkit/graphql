@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "projects": {
@@ -8,7 +9,10 @@
       "entryFile": "index",
       "sourceRoot": "libs/graphql/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/graphql/tsconfig.lib.json"
+        "tsConfigPath": "libs/graphql/tsconfig.lib.json",
+        "assets": [
+          "**/*.graphql"
+        ]
       }
     }
   },

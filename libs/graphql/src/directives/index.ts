@@ -1,5 +1,5 @@
-import { UpperCaseDirective } from './upper-case.directive';
+import { upperDirectiveTransformer } from './upper.directive';
 
-export const directivesCommons = {
-  upper: UpperCaseDirective,
+export const coreBuildDirectives = (schema) => {
+  return upperDirectiveTransformer(schema, 'upper');
 };
