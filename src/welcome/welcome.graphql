@@ -1,0 +1,15 @@
+type Query {
+    hello: String!
+    helloUpper: String! @upper
+    testObjectID(id: ObjectId!, date: Date!): String!
+    testCustomData: CustomDate!
+    testCustomNUmber: CustomNumber!
+}
+
+type Mutation {
+    ping(message: String!): Boolean!
+}
+
+type Subscription {
+    pont: String!
+}
