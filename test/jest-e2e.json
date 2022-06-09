@@ -11,10 +11,6 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "moduleNameMapper": {
-    "@nestjs-toolkit/winston-logger/(.*)": "<rootDir>/../libs/logger/src/$1",
-    "@nestjs-toolkit/winston-logger": "<rootDir>/../libs/logger/src",
-    "@nestjs-toolkit/base/(.*)": "<rootDir>/../libs/base/src/$1",
-    "@nestjs-toolkit/base": "<rootDir>/../libs/base/src",
     "@nestjs-toolkit/graphql/(.*)": "<rootDir>/../libs/graphql/src/$1",
     "@nestjs-toolkit/graphql": "<rootDir>/../libs/graphql/src"
   }

@@ -1,5 +1,5 @@
 import { ResolveField, Resolver } from '@nestjs/graphql';
-import { RequestLocale } from '@nestjs-toolkit/base/dist/locale';
+import { RequestLocale } from '@nestjs-toolkit/base/locale';
 
 type Context = {
   requestLocale: RequestLocale;
@@ -9,10 +9,7 @@ type Context = {
 export class CustomDateResolver {
   @ResolveField()
   utc(date, params, { requestLocale }: Context) {
-    return requestLocale
-      .toMoment(date)
-      .utc()
-      .toISOString();
+    return requestLocale.toMoment(date).utc().toISOString();
   }
 
   @ResolveField()
@@ -37,18 +34,15 @@ export class CustomDateResolver {
 
   @ResolveField()
   timezone(date, { offset }, { requestLocale }: Context) {
-    return requestLocale
-      .toMoment(date)
-      .utcOffset(offset)
-      .toISOString(true);
+    return requestLocale.toMoment(date).utcOffset(offset).toISOString(true);
   }
 
   @ResolveField()
-  format(date, { format }, { requestLocale }: Context) {
+  transform(date, { format }, { requestLocale }: Context) {
     const moment = requestLocale.toMomentTimezone(date);
-    const antl = requestLocale.antl;
 
     if (format && format.includes('[calendar]')) {
+      const antl = requestLocale.antl;
       const calendar = moment.calendar(null, {
         sameDay: `[${antl.formatMessage('calendar_same_day')}]`,
         nextDay: `[${antl.formatMessage('calendar_next_day')}]`,

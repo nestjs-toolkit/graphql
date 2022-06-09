@@ -1,0 +1,15 @@
+type Query {
+    hello: String!
+    helloUpper: String! @upper
+    testScalarDate(date: Date!): Date!
+    testCustomData(date: Date!): CustomDate!
+    testCustomNUmber: CustomNumber!
+}
+
+type Mutation {
+    ping(message: String!): Boolean!
+}
+
+type Subscription {
+    pont: String!
+}

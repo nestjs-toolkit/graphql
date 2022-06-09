@@ -1,5 +1,5 @@
 import { ResolveField, Resolver } from '@nestjs/graphql';
-import { currencyFormat } from '@nestjs-toolkit/base/dist/helpers';
+import { currencyFormat } from '@nestjs-toolkit/base/utils';
 
 @Resolver('CustomNumber')
 export class CustomNumberResolver {

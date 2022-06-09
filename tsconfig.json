@@ -11,6 +11,12 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
     "paths": {
       "@nestjs-toolkit/graphql": [
         "libs/graphql/src"
@@ -19,9 +25,5 @@
         "libs/graphql/src/*"
       ]
     }
-  },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  }
 }

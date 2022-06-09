@@ -1,12 +1,12 @@
 {
   "name": "@nestjs-toolkit/graphql",
-  "version": "0.1.3",
-  "description": "core helpers",
+  "version": "1.0.1",
+  "description": "GraphQl helpers",
   "author": "Valmir Barbosa",
   "license": "MIT",
-  "private": false,
   "scripts": {
     "prebuild": "rimraf dist",
+    "postbuild": "cp package.json dist/libs/graphql",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
@@ -22,54 +22,48 @@
     "doc": "doctoc docs --title='## Summary'",
     "commit": "git-cz",
     "release": "release-it --patch",
-    "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && mv dist/libs/graphql/src/* dist && cp -r libs/graphql/schemas dist && rm dist/libs -r"
+    "lib:build": "yarn prebuild && nest build graphql --tsc && yarn postbuild",
+    "gql:gen": "ts-node src/definitions/generate-typings"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@nestjs-toolkit/base": "^1.0.1",
+    "@nestjs/apollo": "^10.0.14",
+    "@nestjs/graphql": "^10.0.15",
+    "@nestjs/platform-fastify": "^8.4.6",
+    "graphql": "^16.5.0"
+  },
   "devDependencies": {
-    "@nestjs-toolkit/base": "^0.1.0",
-    "@nestjs-toolkit/winston-logger": "^0.1.25",
-    "@nestjs/cli": "^7.0.0",
-    "@nestjs/common": "^7.0.0",
-    "@nestjs/core": "^7.0.0",
-    "@nestjs/graphql": "^7.7.0",
-    "@nestjs/platform-express": "^7.0.0",
-    "@nestjs/schematics": "^7.0.0",
-    "@nestjs/testing": "^7.0.0",
-    "@types/express": "^4.17.3",
-    "@types/jest": "25.2.3",
-    "@types/lodash": "^4.14.161",
-    "@types/node": "^13.9.1",
-    "@types/supertest": "^2.0.8",
-    "@typescript-eslint/eslint-plugin": "3.0.2",
-    "@typescript-eslint/parser": "3.0.2",
-    "apollo-server": "^2.18.1",
-    "apollo-server-types": "^0.5.1",
-    "cz-conventional-changelog": "^3.3.0",
-    "deep-object-diff": "^1.1.0",
-    "doctoc": "^1.4.0",
-    "eslint": "7.1.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.1",
-    "fast-safe-stringify": "^2.0.7",
-    "graphql": "^15.3.0",
-    "graphql-redis-subscriptions": "^2.3.1",
-    "graphql-subscriptions": "^1.1.0",
-    "husky": "^4.3.0",
-    "ioredis": "^4.17.3",
-    "jest": "26.0.1",
-    "moment": "^2.29.0",
-    "mongoose": "^5.10.7",
-    "prettier": "^1.19.1",
+    "@nestjs/cli": "^8.2.6",
+    "@nestjs/common": "^8.4.6",
+    "@nestjs/core": "^8.4.6",
+    "@nestjs/schematics": "^8.0.11",
+    "@nestjs/testing": "^8.4.6",
+    "@types/jest": "28.1.1",
+    "@types/node": "^17.0.41",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "apollo-server-fastify": "^3.8.2",
+    "bson": "^4.6.4",
+    "doctoc": "^2.2.0",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "graphql-redis-subscriptions": "^2.4.2",
+    "graphql-subscriptions": "^2.0.0",
+    "ioredis": "^5.0.6",
+    "jest": "^28.1.1",
+    "moment-timezone": "^0.5.34",
+    "prettier": "^2.6.2",
     "reflect-metadata": "^0.1.13",
-    "release-it": "^14.0.2",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4",
-    "supertest": "^4.0.2",
-    "ts-jest": "26.1.0",
-    "ts-loader": "^6.2.1",
-    "ts-node": "^8.6.2",
-    "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.7.4"
+    "rxjs": "^7.5.5",
+    "source-map-support": "^0.5.21",
+    "ts-jest": "^28.0.4",
+    "ts-loader": "^9.3.0",
+    "ts-morph": "^15.1.0",
+    "ts-node": "^10.8.1",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.7.3"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -78,10 +72,13 @@
       "ts"
     ],
     "rootDir": ".",
-    "testRegex": ".spec.ts$",
+    "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
@@ -89,23 +86,11 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "@nestjs-toolkit/graphql/(.*)": "<rootDir>/libs/graphql/src/$1",
-      "@nestjs-toolkit/graphql": "<rootDir>/libs/graphql/src"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn doc && yarn format && git add docs",
-      "pre-push": "yarn lint",
-      "commit-msg": "node ./.github/conventional/validate-commit.js"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "^@nestjs-toolkit/graphql(|/.*)$": "<rootDir>/libs/graphql/src/$1"
     }
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }
