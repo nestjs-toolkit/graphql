@@ -1,6 +1,6 @@
 {
   "name": "@nestjs-toolkit/graphql",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GraphQl helpers",
   "author": "Valmir Barbosa",
   "license": "MIT",
@@ -25,11 +25,8 @@
     "lib:build": "yarn prebuild && nest build graphql --tsc && yarn postbuild",
     "gql:gen": "ts-node src/definitions/generate-typings"
   },
-  "peerDependencies": {
-    "@nestjs-toolkit/base": "^1.0.0",
-    "moment-timezone": "^0.5.34"
-  },
   "dependencies": {
+    "@nestjs-toolkit/base": "^1.0.1",
     "@nestjs/apollo": "^10.0.14",
     "@nestjs/graphql": "^10.0.15",
     "@nestjs/platform-fastify": "^8.4.6",

@@ -1133,10 +1133,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nestjs-toolkit/base@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@nestjs-toolkit/base@npm:1.0.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40nestjs-toolkit%2Fbase%2F1.0.1%2Fcdcc0033db64857c44d318b0670cfb37522180064e0023adc2d4238f57dcfd71"
+  peerDependencies:
+    "@nestjs/graphql": "*"
+    moment-timezone: ^0.5.34
+  checksum: f7ca2d0ca192c46710cf84589eb63ac15779cba364a50900a84b96b0d5fbeb6713b1ee86ddb97cb50d7b4a70f7369bbb29fae04c054aa06ffd6442c836128836
+  languageName: node
+  linkType: hard
+
 "@nestjs-toolkit/graphql@workspace:.":
   version: 0.0.0-use.local
   resolution: "@nestjs-toolkit/graphql@workspace:."
   dependencies:
+    "@nestjs-toolkit/base": ^1.0.1
     "@nestjs/apollo": ^10.0.14
     "@nestjs/cli": ^8.2.6
     "@nestjs/common": ^8.4.6
@@ -1172,9 +1183,6 @@ __metadata:
     ts-node: ^10.8.1
     tsconfig-paths: ^4.0.0
     typescript: ^4.7.3
-  peerDependencies:
-    "@nestjs-toolkit/base": ^1.0.0
-    moment-timezone: ^0.5.34
   languageName: unknown
   linkType: soft
 
