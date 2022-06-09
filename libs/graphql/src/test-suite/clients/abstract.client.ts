@@ -20,17 +20,17 @@ export abstract class AbstractClient {
     };
   }
 
-  public authorization(token: string): AbstractClient {
+  public authorization(token: string): this {
     this.header('Authorization', `Bearer ${token}`);
     return this;
   }
 
-  public header(key: string, value: any): AbstractClient {
+  public header(key: string, value: any): this {
     this.config.headers[key] = value;
     return this;
   }
 
-  public setHeaders(headers: any): AbstractClient {
+  public setHeaders(headers: any): this {
     this.config.headers = { ...headers };
     return this;
   }
