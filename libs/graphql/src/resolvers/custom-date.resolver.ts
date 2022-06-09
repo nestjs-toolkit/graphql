@@ -38,11 +38,11 @@ export class CustomDateResolver {
   }
 
   @ResolveField()
-  format(date, { format }, { requestLocale }: Context) {
+  transform(date, { format }, { requestLocale }: Context) {
     const moment = requestLocale.toMomentTimezone(date);
-    const antl = requestLocale.antl;
 
     if (format && format.includes('[calendar]')) {
+      const antl = requestLocale.antl;
       const calendar = moment.calendar(null, {
         sameDay: `[${antl.formatMessage('calendar_same_day')}]`,
         nextDay: `[${antl.formatMessage('calendar_next_day')}]`,

@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { buildDirectives, ToolkitGraphqlModule } from '@nestjs-toolkit/graphql';
 import { normalizeHeaders } from '@nestjs-toolkit/base/utils';
+import { RequestLocaleInterceptor } from '@nestjs-toolkit/base/locale';
 import { options } from './definitions/configs';
 import { WelcomeModule } from './welcome';
 
@@ -38,6 +40,11 @@ import { WelcomeModule } from './welcome';
     ToolkitGraphqlModule,
     WelcomeModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: RequestLocaleInterceptor,
+    },
+  ],
 })
 export class AppModule {}

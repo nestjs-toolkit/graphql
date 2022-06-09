@@ -13,7 +13,7 @@ export interface CustomDate {
   iso?: Nullable<string>;
   string?: Nullable<string>;
   timezone?: Nullable<string>;
-  format?: Nullable<string>;
+  transform?: Nullable<string>;
 }
 
 export interface CustomNumber {
@@ -27,8 +27,8 @@ export interface CustomNumber {
 export interface IQuery {
   hello(): string | Promise<string>;
   helloUpper(): string | Promise<string>;
-  testObjectID(id: ObjectId, date: Date): string | Promise<string>;
-  testCustomData(): CustomDate | Promise<CustomDate>;
+  testScalarDate(date: Date): Date | Promise<Date>;
+  testCustomData(date: Date): CustomDate | Promise<CustomDate>;
   testCustomNUmber(): CustomNumber | Promise<CustomNumber>;
 }
 
@@ -40,7 +40,4 @@ export interface ISubscription {
   pont(): string | Promise<string>;
 }
 
-export type JSON = any;
-export type ObjectId = any;
-export type Upload = any;
 type Nullable<T> = T | null;

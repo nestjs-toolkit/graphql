@@ -1,1 +1,1 @@
-export { ObjectIdScalar } from './object-id.scalar';
+export { DateScalar } from './date.scalar';

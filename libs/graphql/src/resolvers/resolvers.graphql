@@ -34,7 +34,7 @@ type CustomDate {
     If you know the format of an input string, you can use that to parse a date.
     Read more: [momentjs format date](https://momentjs.com/docs/#/parsing/string-format)
     """
-    format(format: String!): String
+    transform(format: String!): String
 }
 
 type CustomNumber {

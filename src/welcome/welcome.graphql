@@ -1,8 +1,8 @@
 type Query {
     hello: String!
     helloUpper: String! @upper
-    testObjectID(id: ObjectId!, date: Date!): String!
-    testCustomData: CustomDate!
+    testScalarDate(date: Date!): Date!
+    testCustomData(date: Date!): CustomDate!
     testCustomNUmber: CustomNumber!
 }
 

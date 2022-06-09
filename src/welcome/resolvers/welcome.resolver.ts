@@ -1,8 +1,11 @@
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { ObjectId } from 'bson';
+import { Logger } from '@nestjs/common';
 
 @Resolver()
 export class WelcomeResolver {
+  private readonly logger = new Logger(WelcomeResolver.name);
+
   @Query()
   async hello() {
     return 'Hello World!';
@@ -14,14 +17,14 @@ export class WelcomeResolver {
   }
 
   @Query()
-  testObjectID(@Args('id') id: ObjectId, @Args('date') dt: Date): string {
-    console.log('DATE', dt.toISOString());
-    return id.toString();
+  testScalarDate(@Args('date') dt: Date): Date {
+    this.logger.log('ISO DATE', dt.toISOString());
+    return dt;
   }
 
   @Query()
-  testCustomData(): Date {
-    return new Date();
+  testCustomData(@Args('date') dt: Date): Date {
+    return dt;
   }
 
   @Query()

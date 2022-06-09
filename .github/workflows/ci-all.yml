@@ -5,42 +5,33 @@ on: [ pull_request ]
 jobs:
   test-ci:
 
-    runs-on: ubuntu-18.04
-
-    # Service containers to run with `container-job`
-    services:
-      mongo:
-        image: mongo:latest
-        env:
-          MONGODB_DATABASE: nest
-        ports:
-          - 27017:27017
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Setup NodeJs
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16'
           registry-url: 'https://npm.pkg.github.com'
-          always-auth: false
-          scope: nestjs-toolkit
 
-      - name: Yarn intall
+      - name: Yarn install
         run: yarn install
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Lint
         run: yarn lint
 
       - name: testing
-        run: yarn test:cov
+        run: yarn test
 
       - name: testing e2e
         run: yarn test:e2e
 
       - name: lib:build
         run: yarn lib:build
+
+
