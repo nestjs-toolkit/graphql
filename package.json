@@ -26,7 +26,7 @@
     "gql:gen": "ts-node src/definitions/generate-typings"
   },
   "peerDependencies": {
-    "@nestjs-toolkit/base": "*",
+    "@nestjs-toolkit/base": "^1.0.0",
     "moment-timezone": "^0.5.34"
   },
   "dependencies": {

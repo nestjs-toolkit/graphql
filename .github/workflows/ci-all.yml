@@ -3,9 +3,11 @@ name: NestJs Workflow
 on: [ pull_request ]
 
 jobs:
-  test-ci:
-
+  ci:
     runs-on: ubuntu-latest
+
+    env:
+      NPM_GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -19,19 +21,17 @@ jobs:
 
       - name: Yarn install
         run: yarn install
-        env:
-          NPM_GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Lint
         run: yarn lint
 
-      - name: testing
+      - name: Unit test
         run: yarn test
 
-      - name: testing e2e
+      - name: Testing e2e
         run: yarn test:e2e
 
-      - name: lib:build
+      - name: Lib build
         run: yarn lib:build
 
 
